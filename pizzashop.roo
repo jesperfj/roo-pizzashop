@@ -1,0 +1,20 @@
+// Build a pizzashop app
+project --topLevelPackage com.example.roo.pizzashop
+persistence setup --provider HIBERNATE --database POSTGRES
+entity --class ~.domain.Topping  
+field string --fieldName name --notNull --sizeMin 2
+entity --class ~.domain.Base  
+field string --fieldName name --notNull --sizeMin 2
+entity --class ~.domain.Pizza  
+field string --fieldName name --notNull --sizeMin 2
+field number --fieldName price --type java.lang.Float
+field set --fieldName toppings --type ~.domain.Topping
+field reference --fieldName base --type ~.domain.Base
+entity --class ~.domain.PizzaOrder  
+field string --fieldName name --notNull --sizeMin 2
+field string --fieldName address --sizeMax 30
+field number --fieldName total --type java.lang.Float
+field date --fieldName deliveryDate --type java.util.Date
+field set --fieldName pizzas --type ~.domain.Pizza
+controller all --package ~.web
+exit
